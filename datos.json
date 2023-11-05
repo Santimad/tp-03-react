@@ -1,0 +1,47 @@
+[
+  { 
+    "categoria": "propiedad",
+    "tipo": "Casa",
+    "factor": "1.09"
+  },
+  { 
+    "categoria": "propiedad",
+    "tipo": "Oficina",
+    "factor": "2.39"
+  },
+  { 
+    "categoria": "propiedad",
+    "tipo": "Local Comercial",
+    "factor": "1.41"
+  },
+  { 
+    "categoria": "propiedad",
+    "tipo": "Dpto",
+    "factor": "1.02"
+  },
+  { 
+    "categoria": "ubicacion",
+    "tipo": "Ciudad de Córdoba",
+    "factor": "1.11"
+  },
+  { 
+    "categoria": "ubicacion",
+    "tipo": "Rio Cuarto",
+    "factor": "1.04"
+  },
+  { 
+    "categoria": "ubicacion",
+    "tipo": "Unquillo",
+    "factor": "1.29"
+  },
+  { 
+    "categoria": "ubicacion",
+    "tipo": "Villa Allende",
+    "factor": "1.01"
+  },
+  { 
+    "categoria": "ubicacion",
+    "tipo": "Villa Carlos Paz",
+    "factor": "1.33"
+  }
+]

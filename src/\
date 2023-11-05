@@ -1,0 +1,81 @@
+import { Title } from './Title.jsx';
+import { Wrapper } from './Wrapper.jsx';
+import Form from './Form.jsx';
+import PriceStamp from './PriceStamp.jsx';
+//import Button from './Button.jsx';
+import portapapel from './assets/historial.png';
+
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+export let price = 0;
+
+function showWarning() {
+  Swal.fire({
+    text: 'Debes completar todos los campos..',
+    icon: 'warning',
+    timer: 2500,
+    showConfirmButton: false
+  });
+}
+
+function showSucced() {
+  Swal.fire({
+    text: 'Cotización realizada con éxito.',
+    icon: 'success',
+    timer: 2500,
+    showConfirmButton: false
+  }); 
+}
+
+export default function Inicio() {
+  const [fields, setFields] = useState({
+    propiedad: 'default',
+    ubicacion: 'default',
+    area: 20,
+    isDefault: function() {
+      if(this.propiedad === 'default' || 
+	 this.ubicacion === 'default') {
+	return true;
+      }
+      return false;
+    }
+  });
+
+  const handleInput = (event) => {
+    const {name, value} = event.target;
+
+    setFields({...fields, [name]: value});
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if(fields.isDefault())
+      showWarning();
+    else { 
+      price = 20;
+      showSucced();
+    }
+  }
+
+  return (
+    <>
+      <div className="historial">
+	<Link to='/historial'>
+	  <img  height="48" width="48"
+	       src={portapapel} alt="..." />
+	</Link>
+      </div>
+      <Title text="Seguros del hogar" title />
+      <Wrapper>
+	<Title text="Completa los datos solicitados." />
+      	<Form handleSubmit={handleSubmit} handleInput={handleInput}>
+	  {/* <Button> Cotizar </Button> */}
+	</Form>
+      	<PriceStamp hidden/>
+      </ Wrapper>
+    </>
+  );
+}
