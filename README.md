@@ -1,8 +1,6 @@
-# React + Vite
+TP-03 de React para el curso de Untref de Argentina Programa 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Observaciones:
 
-Currently, two official plugins are available:
+-> No pude usar float para posicionar con css el elemento Link de react router (Img del portapapeles en la esquina sup derecha) porque perdía su funcionalidad y no redireccionaba. Por esto la img tiene una pequeña area que no es clickeable.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
