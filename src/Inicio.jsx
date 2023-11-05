@@ -20,7 +20,7 @@ const swalAlert = (message, icon = 'warning') => {
 }
 
 export default function Inicio() {
-  const [fields, setFields] = React.useState({
+  const [cotizacion, setCotizacion] = React.useState({
     propiedad: 'default',
     ubicacion: 'default',
     date: undefined,
@@ -42,25 +42,38 @@ export default function Inicio() {
 
     if(options) {
       text = options[selectedIndex].text;
-      setFields({...fields, [name]: text});
+      setCotizacion({...cotizacion, [name]: text});
     } else{
-	setFields({...fields, [name]: value});
+      setCotizacion({...cotizacion, [name]: value});
     }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const {propiedad, ubicacion} = event.target;
 
-    if(fields.isDefault()){
+    if(cotizacion.isDefault()){
       swalAlert("Debes completar todos los campos.");
     }
     else { 
       swalAlert("Cotización exitosa.", "success");
-      let coti = new Cotizador(event.target.propiedad.value,event.target.ubicacion.value, fields.area);
-      setFields({...fields, poliza: coti.cotizarPoliza(),
-		 date: new Date().toLocaleString() });
+      let coti = new Cotizador(propiedad.value, ubicacion.value, cotizacion.area);
+      setCotizacion({...cotizacion, poliza: coti.cotizarPoliza(), date: new Date().toLocaleString() });
       setHidden(false); 
     }
+  }
+
+  const guardarCotizacion = (event) => {
+    const nuevaCotizacion = cotizacion;
+
+    const historialCotizaciones = JSON.parse(localStorage.getItem('historialCotizaciones')) || [];
+    historialCotizaciones.push(nuevaCotizacion);
+    if(localStorage.getItem('historialCotizaciones')){
+      localStorage.removeItem('historialCotizaciones');
+    }
+    localStorage.setItem('historialCotizaciones', JSON.stringify(historialCotizaciones));
+
+    setHidden(true);
   }
 
   return (
@@ -76,8 +89,8 @@ export default function Inicio() {
 	<Title text="Completa los datos solicitados." />
       	<Form handleSubmit={handleSubmit} handleInput={handleInput}>
 	</Form>
-      	<Price setHidden={setHidden} fields={fields} 
-		    hidden={hidden}/>
+      	<Price onClick={guardarCotizacion} cotizacion={cotizacion} 
+		    hidden={hidden} />
       </ Wrapper>
     </>
   );
