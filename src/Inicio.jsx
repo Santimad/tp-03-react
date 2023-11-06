@@ -121,8 +121,7 @@ export default function Inicio() {
       <Wrapper>
 	<Title text="Completa los datos solicitados." />
       	<Form content={content} setContent={setContent}
-	  handleSubmit={handleSubmit} handleInput={handleInput}>
-	</Form>
+	  handleSubmit={handleSubmit} handleInput={handleInput} />
       	<Price onClick={guardarCotizacion} cotizacion={cotizacion} 
 		    hidden={hidden} />
       </ Wrapper>
