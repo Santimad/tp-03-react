@@ -29,7 +29,7 @@ const toast = () => {
     gravity: 'top',
     position: 'right',
     style: {
-      background: 'CornflowerBlue'
+      background: 'CornflowerBlue',
     }
   }).showToast();
 }
