@@ -54,9 +54,11 @@ export default function Inicio() {
     }
   });
   const [hidden, setHidden] = React.useState(true);
+  const [content, setContent] = React.useState('Cotizar');
 
   const handleInput = (event) => {
     const {name, value, options, selectedIndex} = event.target;
+
     let text;
 
     if(options) {
@@ -75,10 +77,21 @@ export default function Inicio() {
       swalAlert("Debes completar todos los campos.");
     }
     else { 
-      	let coti = new Cotizador(propiedad.value, ubicacion.value, cotizacion.area);
-      	setCotizacion({...cotizacion, poliza: coti.cotizarPoliza(), date: new Date().toLocaleString() });
-      	swalAlert("Cotización exitosa.", "success");
+      setContent(loader());
+      let promise = new Promise(function(resolve, reject) {
+	setTimeout(() => {
+	  let coti = new Cotizador(propiedad.value, ubicacion.value, cotizacion.area);
+      	  setCotizacion({...cotizacion, poliza: coti.cotizarPoliza(), date: new Date().toLocaleString() });
+      	  swalAlert("Cotización exitosa.", "success");
+	  resolve();
+	}, 2500);
+      });
+
+      promise.then(() => {
+	setContent('Cotizar');
 	setHidden(false);
+      })
+
     }
   }
 
@@ -107,7 +120,8 @@ export default function Inicio() {
       <Title text="Seguros del hogar" title />
       <Wrapper>
 	<Title text="Completa los datos solicitados." />
-      	<Form handleSubmit={handleSubmit} handleInput={handleInput}>
+      	<Form content={content} setContent={setContent}
+	  handleSubmit={handleSubmit} handleInput={handleInput}>
 	</Form>
       	<Price onClick={guardarCotizacion} cotizacion={cotizacion} 
 		    hidden={hidden} />

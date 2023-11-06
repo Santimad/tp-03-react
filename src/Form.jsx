@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const ellipsis = String.fromCodePoint(0x2026);
 
-export default function Form({txtButton, handleSubmit, handleInput}) {
+export default function Form({content, setContent, handleSubmit, handleInput}) {
   const [data, setData] = React.useState([]); 
   const [disabled, setDisabled] = React.useState(false);
 
@@ -67,7 +67,7 @@ export default function Form({txtButton, handleSubmit, handleInput}) {
 	<li class="align-center submit">
 	  <button type="submit" className="button-outline"
 		  disabled={disabled}>
-	    Cotizar
+	    {content}
 	  </button>
 	</li>
       </ul>
