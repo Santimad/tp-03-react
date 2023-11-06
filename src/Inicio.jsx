@@ -5,10 +5,12 @@ import Price from './Price.jsx';
 //import Button from './Button.jsx';
 import portapapel from './assets/historial.png';
 import Cotizador from './cotizador.js';
+//import toast from './Toast.js';
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Toastify from 'toastify-js';
 
 const swalAlert = (message, icon = 'warning') => {
   Swal.fire({
@@ -17,6 +19,23 @@ const swalAlert = (message, icon = 'warning') => {
     timer: 3000,
     showConfirmButton: false
   });
+}
+
+const toast = () => {
+  Toastify({
+    text: 'Cotización guardada.',
+    duration: 4000,
+    newWindow: true,
+    gravity: 'top',
+    position: 'right',
+    style: {
+      background: 'CornflowerBlue'
+    }
+  }).showToast();
+}
+
+const loader = () => {
+  return <div className="loader"></div>; 
 }
 
 export default function Inicio() {
@@ -56,10 +75,10 @@ export default function Inicio() {
       swalAlert("Debes completar todos los campos.");
     }
     else { 
-      swalAlert("Cotización exitosa.", "success");
-      let coti = new Cotizador(propiedad.value, ubicacion.value, cotizacion.area);
-      setCotizacion({...cotizacion, poliza: coti.cotizarPoliza(), date: new Date().toLocaleString() });
-      setHidden(false); 
+      	let coti = new Cotizador(propiedad.value, ubicacion.value, cotizacion.area);
+      	setCotizacion({...cotizacion, poliza: coti.cotizarPoliza(), date: new Date().toLocaleString() });
+      	swalAlert("Cotización exitosa.", "success");
+	setHidden(false);
     }
   }
 
@@ -72,6 +91,7 @@ export default function Inicio() {
       localStorage.removeItem('historialCotizaciones');
     }
     localStorage.setItem('historialCotizaciones', JSON.stringify(historialCotizaciones));
+    toast();
 
     setHidden(true);
   }
