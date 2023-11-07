@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const ellipsis = String.fromCodePoint(0x2026);
 
-export default function Form({content, setContent, handleSubmit, handleInput}) {
+export default function Form({content, setContent, onClick, onChange}) {
   const [data, setData] = React.useState([]); 
   const [disabled, setDisabled] = React.useState(false);
 
@@ -18,13 +18,13 @@ export default function Form({content, setContent, handleSubmit, handleInput}) {
   }, []);
   
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onClick}>
       <ul>
         <li class="align-center" >
 	  <label htmlFor="propiedad" class="align-center">
 	    Selecciona el tipo de propiedad
 	  </label>
-	  <select onChange={handleInput} 
+	  <select onChange={onChange} 
 		  id="propiedad" 
 		  name="propiedad" >
 	    <option value={ellipsis} selected disabled> 
@@ -40,7 +40,7 @@ export default function Form({content, setContent, handleSubmit, handleInput}) {
 	<li class="align-center" >
 	  <label htmlFor="ubicacion" class="align-center"> 
 	  Selecciona su ubicación </label>
-	  <select onChange={handleInput}
+	  <select onChange={onChange}
 		  id="ubicacion" 
 		  name="ubicacion" >
 	    <option value={ellipsis} selected disabled> 
@@ -56,7 +56,7 @@ export default function Form({content, setContent, handleSubmit, handleInput}) {
 	<li class="align-center" >
 	  <label htmlFor="area" class="align-center"> 
 	    Ingrese los metros cuadrados:</label>
-	  <input onChange={handleInput}
+	  <input onChange={onChange}
 		 type="number"
 		 placeholder="20" 
 		 min="20"
