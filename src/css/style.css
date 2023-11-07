@@ -14,6 +14,14 @@ ul {
   list-style-type: none;
 }
 
+.container.flaticon {
+  padding: 2rem 0;
+}
+a.flaticon {
+  color: #fff;
+  background: midnightblue;
+}
+
 .historial {
   text-align: right;
   overflow: visible;
